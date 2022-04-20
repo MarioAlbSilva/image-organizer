@@ -17,14 +17,15 @@ def layout():
             sg.FolderBrowse()],
            [sg.Frame('Files', files_frame),
             sg.Frame('Organize Files', organize_frame)],
-           [sg.Output(size=(100, 5))],
+           [sg.Multiline(size=(100, 5), disabled=True, autoscroll=True, reroute_stdout=True, reroute_stderr=True)],
            [sg.Button('Run', key='-RUN-')]]
 
     return gui
 
 
-def organize_files(move_files):
+def organize_files(move_files, files_folder, destination_folder):
     print('Start process')
+    print('Move files ' if move_files else 'Copy files' + ' from ' + files_folder + ' to ' + destination_folder)
 
 
 def main():
@@ -39,7 +40,19 @@ def main():
             break
 
         if event == '-RUN-':
-            organize_files(values['-MOVE-'])
+            files_folder = values['-PHOTOS-']
+            destination_folder = values['-DESTINATION-']
+
+            if len(files_folder) == 0:
+                sg.Popup('Photos location not select')
+                continue
+
+            if len(destination_folder) == 0:
+                sg.Popup('Destination location not select')
+                continue
+
+            organize_files(values['-MOVE-'], files_folder, destination_folder)
+
 
 if __name__ == '__main__':
     main()

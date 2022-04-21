@@ -26,7 +26,8 @@ def layout():
 
 def organize_files(move_files, files_folder, destination_folder):
     print('Start process')
-    print('Move files ' if move_files else 'Copy files' + ' from ' + files_folder + ' to ' + destination_folder)
+    type_operation = 'Move files ' if move_files else 'Copy files'
+    print(f'{type_operation} from {files_folder} to {destination_folder}')
 
     characters_list = ['/', '#', '-', '_']
     included_extensions = ['jpg', 'jpeg', 'bmp', 'png', 'gif']
@@ -44,16 +45,16 @@ def organize_files(move_files, files_folder, destination_folder):
 
         if not os.path.exists(folder):
             os.makedirs(folder)
-            print('create folder ' + folder)
+            print(f'create folder {folder}')
 
         if move_files:
             shutil.move(files_folder + '/' + file, folder)
         elif not move_files:
             shutil.copy2(files_folder + '/' + file, folder)
 
-        print(file + ' to ' + folder)
+        print(f'{file} to {folder}')
 
-    print('process finish')
+    print('process finished')
 
 
 def main():

@@ -24,7 +24,7 @@ def layout():
     return gui
 
 
-def organize_files(move_files, files_folder, destination_folder):
+def organize_files(move_files: bool, files_folder: str, destination_folder: str):
     print('Start process')
     type_operation = 'Move files ' if move_files else 'Copy files'
     print(f'{type_operation} from {files_folder} to {destination_folder}')
